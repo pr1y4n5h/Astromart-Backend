@@ -9,6 +9,7 @@ router
   .get(async (req, res) => {
     res.send("This is a login page");
   })
+
   .post(async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -25,7 +26,7 @@ router
         const isMatched = await bcrypt.compare(password, userData.password);
         if (isMatched) {
           const token = jwt.sign(
-            { username: userData.username },
+            { userId: userData._id },
             process.env.API_SECRET,
             { expiresIn: "24h" }
           );

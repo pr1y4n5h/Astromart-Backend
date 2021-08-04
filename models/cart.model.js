@@ -3,28 +3,41 @@ const { Schema } = mongoose;
 
 const CartSchema = new Schema(
   {
-    _id: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
 
-    itemsInCart: [
-      {
-        product: {
-          type: Schema.Types.ObjectId,
-          ref: "Product",
-        },
+    product: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+    },
 
-        quantity: {
-          type: Number,
-          required: "Can't add to cart without quantity!",
-        },
-      },
-    ],
+    quantity: {
+      type: Number,
+      default: 1,
+    },    
   },
+  
   { timestamps: true }
 );
 
-const Cart = mongoose.model("CartItem", CartSchema);
+// const CartSchema = new Schema(
+//   {
+//     product: {
+//       type: Schema.Types.ObjectId,
+//       ref: "Product",
+//     },
+
+//     quantity: {
+//       type: Number,
+//       default: 1,
+//     },    
+//   },
+  
+//   { timestamps: true }
+// );
+
+const Cart = mongoose.model("Cart", CartSchema);
 
 module.exports = { Cart };

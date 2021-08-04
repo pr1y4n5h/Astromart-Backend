@@ -3,6 +3,9 @@ const router = express.Router();
 const { Wishlist } = require("../models/wishlist.model");
 const {authenticateUser} = require("../middleware/authenticate")
 
+
+// router.use(authenticateUser);
+
 router.route("/:userId")
 .get( async (req, res) => {
   const { userId } = req.params;
@@ -28,7 +31,6 @@ router.route("/:userId/:productId")
             userId: { _id: userId },
             product: { _id: productId },
           }).save();
-
     res.json({
       success: true,
       wishlistItem: wishlistItem,
@@ -40,6 +42,38 @@ router.route("/:userId/:productId")
 }
 )
 
-// router.use(authenticateUser)
+
+// router.route("/")
+// .get( async (req, res) => {
+//   try {
+//     const wishlist = await Wishlist.find({})
+//       .populate("product")
+//       .exec();
+//     res.json({ success: true, wishlist: wishlist });
+//   } catch (err) {
+//     res.status(500).json({ success: false, message: err.message });
+//   }
+// });
+
+// router.route("/:productId")
+// .post( async (req, res) => {
+//   const { type } = req.body;
+//   const { productId } = req.params;
+//   try {
+//     const wishlistItem = type === "REMOVE" ? await Wishlist.findOneAndRemove({
+//             product: { _id: productId }
+//           }) : await new Wishlist({
+//             product: { _id: productId }
+//           }).save();
+//     res.json({
+//       success: true,
+//       wishlistItem: wishlistItem,
+//       message: "Wishlist updated",
+//     });
+//   } catch (err) {
+//     res.status(500).json({ success: false, message: err.message });
+//   }
+// }
+// )
 
 module.exports = router

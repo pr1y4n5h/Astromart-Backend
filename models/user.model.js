@@ -27,12 +27,6 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: "Password can't be void",
-      //  validate: {
-      //      validator: function(text) {
-      //        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/g.test(text);
-      //      },
-      //      message: props => `Password should contain 8 letters and should be alphanumeric (atleast one number, one smallcase and uppercase alphabets)`
-      //    }
     },
   },
   { timestamps: true }

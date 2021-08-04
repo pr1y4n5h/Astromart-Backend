@@ -5,7 +5,7 @@ const { User } = require("../models/user.model");
 router.route("/")
 .get(async (req, res) => {
   res.send("This is signup page")
-} )
+})
 .post(async (req, res) => {
   const {name, username, email, password} = req.body;
   if(!name || !username || !email || !password) {
@@ -16,11 +16,8 @@ router.route("/")
     const emailExists = await User.findOne({ email: email });
     const userExists = await User.findOne({ username: username })
 
-    if(userExists) {
-      return res.status(422).json({message: "Username already exists"});
-    }
-    if(emailExists) {
-      return res.status(422).json({message: "Email already exists"})
+    if(userExists || emailExists) {
+      return res.status(422).json({message: "User already exists"});
     }
 
     const user = new User({name, username, email, password})

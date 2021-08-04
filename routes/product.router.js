@@ -42,7 +42,6 @@ router.param("productId", async (req, res, next, productId) => {
         .json({ success: false, message: "Error in getting product" });
     }
     req.product = product;
-    // console.log(req.product)
     next();
   } catch {
     res.status(400).json({
@@ -67,13 +66,5 @@ router
     product.__v = undefined;
     res.json({ success: true, product });
   });
-
-// For removing product
-
-// .delete(async (req,res) => {
-//   let {product} = req;
-//   await product.remove();
-//   res.json({success: true, product})
-// })
 
 module.exports = router;
