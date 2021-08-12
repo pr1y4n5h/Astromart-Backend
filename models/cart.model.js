@@ -22,22 +22,6 @@ const CartSchema = new Schema(
   { timestamps: true }
 );
 
-// const CartSchema = new Schema(
-//   {
-//     product: {
-//       type: Schema.Types.ObjectId,
-//       ref: "Product",
-//     },
-
-//     quantity: {
-//       type: Number,
-//       default: 1,
-//     },    
-//   },
-  
-//   { timestamps: true }
-// );
-
 const Cart = mongoose.model("Cart", CartSchema);
 
 module.exports = { Cart };

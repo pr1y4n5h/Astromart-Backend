@@ -36,7 +36,6 @@ const loginRouter = require("./routes/login.router")
 
 // mounting Routers on URL
 app.use("/products", productsRouter);
-
 app.use("/cart", cartRouter);
 app.use("/wishlist", wishlistRouter);
 app.use("/sign-up", userRouter);

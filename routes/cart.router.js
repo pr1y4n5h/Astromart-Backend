@@ -3,7 +3,7 @@ const router = express.Router();
 const { Cart } = require("../models/cart.model");
 const { authenticateUser } = require("../middleware/authenticate");
 
-// router.use(authenticateUser);
+router.use(authenticateUser);
 
 router.route("/").post(async (req, res) => {
   try {
@@ -18,20 +18,6 @@ router.route("/").post(async (req, res) => {
     res.status(500).json({ success: false, message: "Error in adding item" });
   }
 })
-
-
-
-// .get(async (req,res) => {
-//   try {
-//      const itemsIncart = await Cart.find({})
-//        .populate("product")
-//        .exec();
-//      res.json({ success: true, cart: itemsIncart, message: "Your Cart" });
-//    } catch (err) {
-//      res.status(500).json({ success: false, message: err.message });
-//    }
-    
-// })
 
 router.route("/:userId").get(async (req, res) => {
   const { userId } = req.params;
@@ -68,26 +54,5 @@ router.route("/:userId/:productId").post(async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 });
-
-// router.route("/:productId").post(async (req, res) => {
-//   const { productId } = req.params;
-//   const { quantity } = req.body;
-//   try {
-//     const cart =
-//       quantity === 0
-//         ? await Cart.findOneAndRemove({
-//             product: { _id: productId }
-//           })
-//         : await Cart.findOneAndUpdate(
-//             {
-//               product: { _id: productId }
-//             },
-//             { quantity }
-//           );
-//     res.json({ success: true, cart: cart });
-//   } catch (err) {
-//     res.status(500).json({ success: false, message: err.message });
-//   }
-// });
 
 module.exports = router;
