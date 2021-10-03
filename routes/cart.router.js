@@ -55,11 +55,11 @@ router.route("/:userId/:productId").post(async (req, res) => {
   }
 });
 
-router.route("/checkout/:user/final").post(async (req,res) => {
-  const { user } = req.params;
+router.route("/checkout").post(async (req,res) => {
+  const { userId } = req.body;
   try {
     await Cart.deleteMany({
-      userId: { _id: user },
+      userId: { _id: userId },
     });
     res.json({ success: true, message: "Order placed successfully!" });
   }
